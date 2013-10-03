@@ -1,28 +1,26 @@
-# SSH Module
+# Console-data Module
 
-This module will install and configure a ssh server.
+This module will install and configure console-data.
 
 ## Usage
 
 ### Minimal server configuration
 
 ```puppet
-class { 'ssh': }
+class { 'console_data': }
 ```
-This will do the typical install, configure and service management.
-Default port is 2202
-root login is forbidden by default, so is password authentification
+This will do the typical install, configure keyboard layout to use french by default.
 
 
 ### More server configuration
 
 ```puppet
-class { 'ssh':
-  $allowed_extra           = [ '127.0.0.1' ],
-  $port                    = 22,
-  $permit_root             = 'yes,
-  $password_authentication = 'yes,
-  $motd                    = true,
+class { 'console_data':
+  keymap         => 'console-data/keymap/azerty/french/variant',
+  keymap_select  => 'With Euro (latin 9)',
+  keymap_full    => 'fr-latin9',
+  keymap_family  => 'azerty',
+  bootmap_md5sum => 'c626478f99891cf5e0489e171fae7811',
 }
 ```
 

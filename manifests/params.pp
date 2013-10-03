@@ -1,8 +1,7 @@
-class template::params () {
+class console_data::params () {
   case $::operatingsystem {
     /(Ubuntu|Debian)/: {
-      $service_name   = 'template'
-      $package_name   = 'template'
+      $package_name   = 'console-data'
     }
     default: {
       fail("Module ${module_name} is not supported on ${::operatingsystem}")

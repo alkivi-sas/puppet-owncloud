@@ -1,1 +1,3 @@
-* Add more keys in configuration to have a more flexible sshd_config
+* Make select an hash to allow multiple selections
+* Find a better to update-console-data than a touch ...
+
