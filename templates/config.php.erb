@@ -1,0 +1,6 @@
+<?php
+$CONFIG = array (
+<% @config_hash.each do |name,value| %>
+  '<%= name %>' => <%= value %>,
+<% end %>
+);

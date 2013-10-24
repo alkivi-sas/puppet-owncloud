@@ -1,24 +1,25 @@
-class console_data::install () {
+class owncloud::install () {
 
-  if(! defined(File['/root/preseed/']))
-  {
-    file { '/root/preseed':
-      ensure => directory,
-      mode   => '0750',
-    }
+  mysql::database{ 'owncloud':
+    user    => 'owncloud',
+    require => Class['mysql'],
   }
 
-  file { '/root/preseed/console_data.preseed':
-    content => template('console_data/preseed.erb'),
-    mode    => '0600',
-    backup  => false,
-    require => File['/root/preseed'],
+  apt::key { 'owncloud':
+    key        => 'BA684223',
+    key_source => 'http://download.opensuse.org/repositories/isv:ownCloud:community/Debian_7.0/Release.key',
   }
 
+  apt::source { 'owncloud':
+    location    => 'http://download.opensuse.org/repositories/isv:ownCloud:community/Debian_7.0/',
+    repos       => '',
+    release     => '/',
+    include_src => false,
+    require     => Apt::Key['owncloud'],
+  }
  
-  package { $console_data::params::package_name:
+  package { $owncloud::params::package_name:
     ensure       => installed,
-    responsefile => '/root/preseed/console_data.preseed',
-    require      => File['/root/preseed/console_data.preseed'],
+    require      => Apt::Source['owncloud'],
   }
 }

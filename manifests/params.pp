@@ -1,7 +1,7 @@
-class console_data::params () {
+class owncloud::params () {
   case $::operatingsystem {
     /(Ubuntu|Debian)/: {
-      $package_name   = 'console-data'
+      $package_name   = 'owncloud'
     }
     default: {
       fail("Module ${module_name} is not supported on ${::operatingsystem}")
