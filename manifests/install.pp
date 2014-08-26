@@ -1,8 +1,8 @@
 class owncloud::install () {
 
-  mysql::database{ 'owncloud':
-    user    => 'owncloud',
-    require => Class['mysql'],
+  mysql::db { 'owncloud':
+    user     => 'owncloud',
+    password => alkivi_password('owncloud', 'db'),
   }
 
   apt::key { 'owncloud':
